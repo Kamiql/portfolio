@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { faGithub, faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faCode, faDatabase, faBars, faXmark, faCalendar, faMapMarkerAlt, faUserTag } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faCode, faDatabase, faBars, faXmark, faCalendar, faMapMarkerAlt, faUserTag, faPencil, faBucket } from '@fortawesome/free-solid-svg-icons';
 
 type Skill = {
   name: string;
@@ -13,7 +13,6 @@ type Skill = {
 
 type Experience = {
   title: string;
-  period: [Date, Date | null];
   description: string;
   achievements: string[];
 };
@@ -44,11 +43,11 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('about');
 
   const personalInfo: PersonalInfo = {
-    name: "Kilian (kamiql)",
+    name: "kamiql",
     birthDate: new Date(2010, 8, 30),
     specialization: "Java Development",
     location: "Germany",
-    bio: "Passionate Java developer specializing in Paper/Bukkit plugins. Focused on creating efficient, scalable backend solutions with clean code architecture."
+    bio: "Hey there! Its me, kamiql. I am a passionate Java developer, slowly looking forward to progress to a professional level. Even Though you can consider me a vibe coder, i've achived couple of things im proud of - look around..."
   };
 
   const skills: Skill[] = [
@@ -57,68 +56,80 @@ export default function Portfolio() {
       level: 90,
       icon: faCode,
       startDate: new Date(2022, 0, 1),
-      technologies: ["Spring Boot", "Gradle"]
+      technologies: ["Bukit", "Paper", "Gradle"]
+    },
+    {
+      name: "Bukkit",
+      level: 80,
+      icon: faBucket,
+      startDate: new Date(2022, 0, 1),
+      technologies: ["NMS", "Kyori"]
     },
     {
       name: "Discord API",
-      level: 30,
+      level: 40,
       icon: faDiscord,
       startDate: new Date(2023, 3, 1),
       technologies: ["JDA", "Webhooks", "OAuth2"]
     },
     {
       name: "MongoDB",
-      level: 80,
+      level: 50,
       icon: faDatabase,
-      startDate: new Date(2024, 5, 1),
-      technologies: ["Atlas", "Aggregation", "Sharding"]
+      startDate: new Date(2023, 9, 1),
+      technologies: ["Caching", "Sharding"]
     },
     {
       name: "MySQL",
-      level: 65,
+      level: 20,
       icon: faDatabase,
-      startDate: new Date(2023, 2, 1),
-      technologies: ["SQL Optimization", "Indexing", "Transactions"]
+      startDate: new Date("2024/5/6"),
+      technologies: ["Transactions"]
     },
+    {
+      name: "WebDev",
+      level: 10,
+      icon: faPencil,
+      startDate: new Date("2025/1/1"),
+      technologies: ["React", "Vite", "PhP", "Springboot", ""]
+    }
   ];
 
   const experiences: Experience[] = [
     {
       title: "Java Developer",
-      period: [new Date(2021, 0, 1), null],
       description: "Development of backend systems and APIs using Java ecosystem technologies",
       achievements: [
-        "Created RESTful APIs with Spring Boot for game server integrations",
-        "Implemented secure authentication systems with JWT",
-        "Optimized database queries improving performance by 40%"
+        "Many wrappers & frameworks such as a very nicely designed database manager working with mongodb (credits @Srino)",
+        "Advanced Bukkit/Paper plugins",
+        "Springboot backend for dashboard app"
       ]
     },
     {
       title: "Discord Bot Developer",
-      period: [new Date(2021, 5, 1), null],
       description: "Built custom Discord bots for community management and engagement",
       achievements: [
-        "Developed moderation tools with dynamic role management",
-        "Created interactive dashboards with real-time metrics",
-        "Integrated with external game APIs for data synchronization"
+        "Minecraft account link",
+        "Simple moderation",
+        "Minigames"
       ]
     }
   ];
 
   const projects: Project[] = [
     {
-      img: "/assets/img1.png",
+      img: "/assets/gradle.png",
       title: "Gradle SFTP Upload Plugin",
       description: "Plugin to automate deployment of builds to servers via SFTP",
-      technologies: ["Kotlin", "Gradle", "JSch"],
+      technologies: ["Kotlin", "Gradle"],
       link: "https://github.com/kamiql/sftp-upload"
     },
     {
-      img: "/assets/img2.png",
+      img: "/assets/economy.png",
       title: "Minecraft Economy System",
       description: "Custom economy plugin with multi-currency support",
-      technologies: ["Java", "HikariCP", "MySQL"],
-      link: "#"
+      technologies: ["Kotlin", "MySQL"],
+      link: "https://github.com/Kamiql/KqlEconomy"
     }
   ];
 
@@ -127,7 +138,13 @@ export default function Portfolio() {
       year: 2025,
       goals: [
         "Learn Fabric API for mod development",
-        "Master full-stack web development"
+        "Advanced Full-stack web development"
+      ]
+    },
+    {
+      year: 2026,
+      goals: [
+        "Software w/ rust",
       ]
     }
   ];
@@ -159,10 +176,6 @@ export default function Portfolio() {
     }
 
     return { years, months };
-  };
-
-  const formatExperienceDate = (date: Date): string => {
-    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -214,7 +227,10 @@ export default function Portfolio() {
         <nav className="lg:hidden fixed top-0 left-0 right-0 bg-gray-900/90 backdrop-blur z-30">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
             <div className="flex items-center">
-              <div className="bg-gray-200 border-2 border-dashed rounded-xl w-8 h-8 mr-2" />
+              <img 
+                src='assets/kamiql.png'
+                className="bg-gray-200 border-2 border-dashed rounded-xl w-8 h-8 mr-2" 
+              />
               <div className="text-xl font-bold text-blue-400">kamiql</div>
             </div>
             <button
@@ -352,7 +368,7 @@ export default function Portfolio() {
                   <h3 className="text-xl font-bold mb-6 text-blue-400">Background</h3>
                   <p className="text-gray-300 leading-relaxed">
                     I'm a young developer focused on backend systems and game server technologies.
-                    Since starting my journey in 2021, I've specialized in Java development with
+                    Since starting my journey in 2022, I've specialized in Java development with
                     expertise in Minecraft plugin architecture and database optimization. My approach
                     emphasizes clean code practices and scalable solutions.
                   </p>
@@ -395,7 +411,7 @@ export default function Portfolio() {
                         <h3 className="text-xl font-bold">{skill.name}</h3>
                         <div className="text-sm text-gray-400">
                           {exp.years > 0 ? `${exp.years}yr ` : ''}
-                          {exp.months}mo experience
+                          {exp.months}mo
                         </div>
                       </div>
                     </div>
@@ -443,25 +459,12 @@ export default function Portfolio() {
 
             <div className="space-y-8">
               {experiences.map((exp, index) => {
-                const start = exp.period[0];
-                const end = exp.period[1] || new Date();
-                const duration = calculateExperience(start);
-                const startFormatted = formatExperienceDate(start);
-                const endFormatted = end ? formatExperienceDate(end) : "Present";
-
                 return (
                   <div key={index} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-xl border border-gray-700">
                     <div className="flex flex-wrap justify-between items-start mb-4">
                       <div>
                         <h3 className="text-xl font-bold">{exp.title}</h3>
                         <p className="text-blue-400">{exp.description}</p>
-                      </div>
-                      <div className="text-sm bg-gray-700/50 px-3 py-1 rounded-md mt-2 md:mt-0">
-                        {startFormatted} - {endFormatted}
-                        <span className="ml-2 text-gray-300">
-                          ({duration.years > 0 && `${duration.years}yr `}
-                          {duration.months}mo)
-                        </span>
                       </div>
                     </div>
 
@@ -587,14 +590,14 @@ export default function Portfolio() {
 
             <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 shadow-xl border border-gray-700">
               <div className="grid md:grid-cols-2 gap-8 mb-10">
-                <a href="mailto:contact@kamiql.de" className="group">
+                <a href="mailto:kamiql.dev@gmail.com" className="group">
                   <div className="flex items-center">
                     <div className="w-14 h-14 rounded-lg bg-blue-900/30 flex items-center justify-center mr-4 border border-blue-500/20 group-hover:border-blue-500/50 transition">
                       <FontAwesomeIcon icon={faEnvelope} className="text-blue-400 text-xl" />
                     </div>
                     <div>
                       <div className="text-gray-400 text-sm">Email</div>
-                      <div className="group-hover:text-blue-400 transition">contact@kamiql.de</div>
+                      <div className="group-hover:text-blue-400 transition">kamiql.dev@gmail.com</div>
                     </div>
                   </div>
                 </a>
@@ -615,7 +618,7 @@ export default function Portfolio() {
               <div className="text-center pt-4 border-t border-gray-700/50">
                 <p className="text-gray-400 mb-6">Interested in collaboration or have questions about my work?</p>
                 <a
-                  href="mailto:contact@kamiql.de"
+                  href="mailto:kamiql.dev@gmail.com"
                   className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-full font-bold transition inline-flex items-center shadow-lg shadow-blue-500/20"
                 >
                   <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
