@@ -3,8 +3,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig(({ command }) => ({
-  base: command === 'serve' ? '/' : '/assets/',
+export default defineConfig(({}) => ({
+  base: '/',
   plugins: [react(),tailwindcss(),],
   server: {
     port: 5173,
@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => ({
     }
   },
   build: {
-    outDir: '../backend/public/assets',
+    outDir: '../backend/public',
     emptyOutDir: true
   }
 }))
