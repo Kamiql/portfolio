@@ -19,6 +19,7 @@ type Experience = {
 };
 
 type Project = {
+  img: string;
   title: string;
   description: string;
   technologies: string[];
@@ -106,12 +107,14 @@ export default function Portfolio() {
 
   const projects: Project[] = [
     {
+      img: "/assets/img1.png",
       title: "Gradle SFTP Upload Plugin",
       description: "Plugin to automate deployment of builds to servers via SFTP",
       technologies: ["Kotlin", "Gradle", "JSch"],
       link: "https://github.com/kamiql/sftp-upload"
     },
     {
+      img: "/assets/img2.png",
       title: "Minecraft Economy System",
       description: "Custom economy plugin with multi-currency support",
       technologies: ["Java", "HikariCP", "MySQL"],
@@ -190,7 +193,7 @@ export default function Portfolio() {
               setActiveSection(section);
               break;
             }
-          } 
+          }
           else if (scrollPosition >= sectionTop && scrollPosition < sectionTop + height) {
             setActiveSection(section);
             break;
@@ -246,9 +249,16 @@ export default function Portfolio() {
 
         {/* Hero Section */}
         <section className="container mx-auto px-4 pt-32 pb-20 lg:py-28 flex flex-col items-center text-center">
+
+
+          
           <div className="flex flex-col items-center">
             <div className="relative">
-              <div className="bg-gray-200 border-2 border-dashed rounded-full w-32 h-32 mb-6" />
+              <img
+                src='assets/kamiql.png'
+                title='kamiql-icon'
+                className="bg-gray-200 border-2 border-dashed rounded-full w-32 h-32 mb-6"
+              />
               <div className="absolute bottom-6 right-4 w-6 h-6 rounded-full bg-green-500 border-2 border-gray-900"></div>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
@@ -491,7 +501,11 @@ export default function Portfolio() {
               {projects.map((project, index) => (
                 <div key={index} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 shadow-lg border border-gray-700 hover:border-blue-500/30 transition-all duration-300 group">
                   <div className="mb-4">
-                    <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-40 mb-4" /> {/* Image here */ }
+                    <img
+                      src={project.img}
+                      alt={project.title}
+                      className="w-full h-40 object-cover rounded-xl mb-4 border-2 border-gray-700"
+                    />
                     <h3 className="text-xl font-bold group-hover:text-blue-400 transition-colors">{project.title}</h3>
                   </div>
                   <p className="text-gray-300 mb-5">{project.description}</p>
