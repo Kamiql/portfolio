@@ -189,7 +189,7 @@ export default function Portfolio() {
         if (element) {
           window.scrollTo({
             top: element.offsetTop - 100,
-            behavior: 'auto'
+            behavior: 'smooth'
           });
         }
       }
