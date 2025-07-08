@@ -31,7 +31,6 @@ echo "📦 Installing backend PHP dependencies..."
 
 sudo apt update
 sudo apt upgrade -y
-sudo apt install composer
 
 cd "$BACKEND_DIR"
 composer install --no-dev --optimize-autoloader
