@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 PROJECT_DIR="/root/portfolio"
 FRONTEND_DIR="$PROJECT_DIR/frontend"
@@ -9,14 +9,17 @@ FRONTEND_BUILD_DIR="$FRONTEND_DIR/dist"
 FRONTEND_DEPLOY_DIR="/var/www/portfolio"
 BACKEND_DEPLOY_DIR="/var/www/portfolio-api"
 
+# Non-interactive APT
+export DEBIAN_FRONTEND=noninteractive
+
 echo "🔄 Git Pull..."
 cd "$PROJECT_DIR"
-git pull
+git pull origin master
 
 ### FRONTEND ###
 echo "📦 Installing frontend NPM packages..."
 cd "$FRONTEND_DIR"
-npm install
+npm ci --silent
 
 echo "🔨 Building Vite project..."
 npm run build
@@ -27,13 +30,14 @@ sudo mkdir -p "$FRONTEND_DEPLOY_DIR"
 sudo cp -r "$FRONTEND_BUILD_DIR"/* "$FRONTEND_DEPLOY_DIR/"
 
 ### BACKEND ###
+echo "📦 Updating system and installing PHP + Composer..."
+sudo apt-get update -qq
+sudo apt-get upgrade -y -qq
+sudo apt-get install -y -qq composer php8.1-intl
+
 echo "📦 Installing backend PHP dependencies..."
-
-sudo apt update
-sudo apt upgrade -y
-
 cd "$BACKEND_DIR"
-composer install --no-dev --optimize-autoloader
+composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
 echo "🚚 Deploying backend to $BACKEND_DEPLOY_DIR..."
 sudo rm -rf "$BACKEND_DEPLOY_DIR"
