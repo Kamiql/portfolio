@@ -46,6 +46,7 @@ sudo cp -r "$BACKEND_DIR"/* "$BACKEND_DEPLOY_DIR/"
 
 echo "✅ Reloading PHP-FPM and NGINX..."
 PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;")
+echo $PHP_VERSION
 systemctl reload php$PHP_VERSION-fpm || systemctl reload php-fpm
 sudo nginx -t && sudo systemctl reload nginx
 
