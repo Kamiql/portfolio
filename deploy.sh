@@ -45,7 +45,8 @@ sudo mkdir -p "$BACKEND_DEPLOY_DIR"
 sudo cp -r "$BACKEND_DIR"/* "$BACKEND_DEPLOY_DIR/"
 
 echo "✅ Reloading PHP-FPM and NGINX..."
-sudo systemctl reload php8.1-fpm
+PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;")
+systemctl reload php$PHP_VERSION-fpm || systemctl reload php-fpm
 sudo nginx -t && sudo systemctl reload nginx
 
 echo "🎉 Deployment complete."
