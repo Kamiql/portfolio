@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { faGithub, faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faCode, faDatabase, faBars, faXmark, faCalendar, faMapMarkerAlt, faUserTag, faBucket } from '@fortawesome/free-solid-svg-icons';
