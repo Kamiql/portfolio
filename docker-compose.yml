@@ -13,16 +13,7 @@ services:
     environment:
       - APP_ENV=production
 
-  nginx-proxy:
-    image: nginx:alpine
-    ports:
-      - "8080:80"
-    volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - frontend
-      - backend
-
 networks:
   default:
+    driver: bridge  
     name: portfolio-network
