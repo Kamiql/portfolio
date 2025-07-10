@@ -19,5 +19,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            git pull origin master
             cd portfolio
             bash deploy.sh
