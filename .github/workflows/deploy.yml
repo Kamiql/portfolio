@@ -11,8 +11,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Docker
+        run: |
+          sudo groupadd docker || true
+          sudo usermod -aG docker $USER
+          newgrp docker
+
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
@@ -28,4 +34,11 @@ jobs:
               git clone https://github.com/kamiql/portfolio.git /root/portfolio
               cd /root/portfolio
             fi
+            
+            # Add Docker permissions
+            sudo usermod -aG docker $USER
+            newgrp docker
+            
+            # Run deployment script
+            chmod +x deploy.sh
             bash deploy.sh

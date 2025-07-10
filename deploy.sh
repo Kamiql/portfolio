@@ -16,10 +16,10 @@ git pull origin master
 echo "🌐 Setup firewall"
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
+sudo ufw allow in on docker0
 sudo ufw reload
 
 echo "🐳 Rebuild Docker containers..."
-# Achtung: libicu-dev MUSS im Dockerfile des backend-Images installiert werden!
 sudo docker-compose down || true
 sudo docker-compose build --pull
 sudo docker-compose up -d
