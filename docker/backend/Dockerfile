@@ -3,20 +3,18 @@ WORKDIR /app
 COPY backend/composer.* ./
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-FROM php:8.1-fpm-alpine
+FROM nginx:alpine
 
-RUN apk add --no-cache --update \
-    icu-dev \
-    libxml2-dev \
-    oniguruma-dev \
-    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
-    mysql-client \
-    && docker-php-ext-install pdo_mysql intl \
-    && apk del .build-deps
+RUN apk add --no-cache php81 php81-fpm php81-pdo php81-pdo_mysql php81-opcache
 
-RUN mkdir /var/www/html/public
+RUN sed -i 's/;clear_env = no/clear_env = no/' /etc/php81/php-fpm.d/www.conf
+
+COPY docker/backend/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/vendor /var/www/html/vendor
 COPY backend /var/www/html
 
-WORKDIR /var/www/html/public
+RUN chown -R nginx:nginx /var/www/html
+
+EXPOSE 80
+CMD ["sh", "-c", "php-fpm81 -D && nginx -g 'daemon off;'"]
