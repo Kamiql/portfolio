@@ -7,6 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 echo "🔄 Systemaktualisierung und Docker-Installation..."
 sudo apt-get update -qq
 sudo apt-get install -y -qq docker.io docker-compose
+sudo apt-get install libicu-dev
 
 echo "🔄 Git Pull..."
 cd "$PROJECT_DIR"
