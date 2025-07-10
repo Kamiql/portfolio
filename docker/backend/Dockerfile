@@ -21,7 +21,7 @@ RUN apk add --no-cache nginx \
     && apk del .build-deps
 
 RUN mkdir -p /run/nginx
-COPY docker/backend/nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/backend/nginx.conf /etc/nginx/nginx.conf
 
 COPY --from=build /app/vendor /var/www/html/vendor
 COPY backend /var/www/html
