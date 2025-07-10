@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 echo "🔄 System update and install Docker + Docker-Compose..."
 sudo apt-get update -qq
-sudo apt-get install -y -qq docker.io docker-compose libicu-dev \
+sudo apt-get install -y -qq docker.io docker-compose \
   || { echo "❌ Failed to install required packages"; exit 1; }
 
 echo "🔄 Pull latest changes from Git..."
