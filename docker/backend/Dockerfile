@@ -18,6 +18,5 @@ RUN mkdir /var/www/html/public
 
 COPY --from=build /app/vendor /var/www/html/vendor
 COPY backend /var/www/html
-WORKDIR /var/www/html/public
-
 COPY docker/backend/nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /var/www/html/public
