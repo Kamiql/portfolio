@@ -14,6 +14,8 @@ RUN apk add --no-cache --update \
     && docker-php-ext-install pdo_mysql intl \
     && apk del .build-deps
 
+RUN mkdir /var/www/html/public
+
 COPY --from=build /app/vendor /var/www/html/vendor
 COPY backend /var/www/html
 WORKDIR /var/www/html/public
