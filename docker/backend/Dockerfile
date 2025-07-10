@@ -18,7 +18,4 @@ COPY --from=build /app/vendor /var/www/html/vendor
 COPY backend /var/www/html
 WORKDIR /var/www/html/public
 
-RUN chown -R www-data:www-data /var/www/html/storage
-RUN chmod -R 775 /var/www/html/storage
-
 COPY docker/backend/nginx.conf /etc/nginx/conf.d/default.conf
