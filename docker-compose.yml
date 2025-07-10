@@ -21,14 +21,6 @@ services:
     networks:
       - portfolio-network
 
-  proxy:
-    build: ./docker/nginx
-    ports:
-      - "80:80"
-    depends_on:
-      - frontend
-      - backend
-
 networks:
   portfolio-network:
     driver: bridge
