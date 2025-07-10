@@ -19,6 +19,13 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            git pull origin master
-            cd portfolio
+            set -e
+            if [ -d "/root/portfolio/.git" ]; then
+              cd /root/portfolio
+              git fetch origin
+              git reset --hard origin/master
+            else
+              git clone https://github.com/kamiql/portfolio.git /root/portfolio
+              cd /root/portfolio
+            fi
             bash deploy.sh
