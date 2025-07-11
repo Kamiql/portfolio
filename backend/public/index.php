@@ -11,14 +11,6 @@ require __DIR__ . '/../vendor/autoload.php';
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
 
-$serveIndex = function (Request $req, Response $res) {
-    $html = file_get_contents(__DIR__ . '/index.html');
-    $res->getBody()->write($html);
-    return $res->withHeader('Content-Type', 'text/html');
-};
-
-$app->get('/', $serveIndex);
-
 $app->get('/assets/{file:.+}', function (Request $req, Response $res, array $args) {
     $filePath = __DIR__ . '/assets/' . $args['file'];
 
@@ -31,12 +23,6 @@ $app->get('/assets/{file:.+}', function (Request $req, Response $res, array $arg
 
     $res->getBody()->write(file_get_contents($filePath));
     return $res;
-});
-
-$app->map(['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], '/{routes:.+}', function (Request $req, Response $res) {
-    return $res
-        ->withHeader('Location', '/')
-        ->withStatus(302);
 });
 
 $app->run();

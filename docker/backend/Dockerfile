@@ -12,18 +12,19 @@ RUN apk add --no-cache nginx supervisor \
 RUN apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS \
         icu-dev \
-        libzip-dev \
+        libxml2-dev \
     && docker-php-ext-install \
         pdo_mysql \
         intl \
-        zip \
+        opcache \
     && apk del .build-deps
 
 COPY docker/backend/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/vendor /var/www/html/vendor
 COPY backend /var/www/html
 
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html/storage
 
 COPY docker/backend/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
