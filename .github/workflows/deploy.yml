@@ -26,9 +26,8 @@ jobs:
             if [ -d ".git" ]; then
               git fetch origin
               git reset --hard origin/master
-              git clean -fd
             else
-              git clone git@github.com:kamiql/portfolio.git .
+              git clone https://github.com/kamiql/portfolio.git .
             fi
             
             chmod +x deploy.sh
