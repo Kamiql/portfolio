@@ -11,12 +11,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Docker
-        run: |
-          sudo groupadd docker || true
-          sudo usermod -aG docker $USER
-          newgrp docker
-
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -26,19 +20,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             set -e
-            if [ -d "/root/portfolio/.git" ]; then
+            if [ -d "/root/portfolio" ]; then
               cd /root/portfolio
-              git fetch origin
-              git reset --hard origin/master
+              git pull origin master
             else
               git clone https://github.com/kamiql/portfolio.git /root/portfolio
               cd /root/portfolio
             fi
             
-            # Add Docker permissions
-            sudo usermod -aG docker $USER
-            newgrp docker
-            
-            # Run deployment script
             chmod +x deploy.sh
-            bash deploy.sh
+            ./deploy.sh
