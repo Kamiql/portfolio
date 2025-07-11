@@ -51,7 +51,4 @@ curl -Ik https://kamiql.de/api || true
 echo "📊 Container status:"
 sudo docker-compose ps
 
-echo "🔍 Backend logs:"
-sudo docker-compose logs portfolio_backend_1
-
 echo "🎉 Deployment complete! Services are running."
