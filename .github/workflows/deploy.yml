@@ -20,12 +20,15 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             set -e
-            if [ -d "/root/portfolio" ]; then
-              cd /root/portfolio
-              git pull origin master
+            mkdir -p /root/portfolio
+            cd /root/portfolio
+            
+            if [ -d ".git" ]; then
+              git fetch origin
+              git reset --hard origin/master
+              git clean -fd
             else
-              git clone https://github.com/kamiql/portfolio.git /root/portfolio
-              cd /root/portfolio
+              git clone git@github.com:kamiql/portfolio.git .
             fi
             
             chmod +x deploy.sh
