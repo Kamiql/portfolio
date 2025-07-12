@@ -5,7 +5,7 @@ RUN npm install
 COPY frontend .
 RUN npm run build
 
-COPY docker/nginx/nginx.conf /etc/nginx/sites-available/portfolio.conf
+COPY docker/nginx/nginx.conf /etc/nginx/sites-available/portfolio
 
 FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
