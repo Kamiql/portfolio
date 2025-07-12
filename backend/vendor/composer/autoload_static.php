@@ -7,9 +7,12 @@ namespace Composer\Autoload;
 class ComposerStaticInit1a4f30c387dd0a16bf6301d136e31239
 {
     public static $files = array (
-        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        'f7a40c1f1f5eb11aee5f7554cb0c8ea7' => __DIR__ . '/..' . '/leafs/form/src/functions.php',
+        '025bf6db9cb3aca2ec53130f65ac52ae' => __DIR__ . '/..' . '/leafs/fs/src/functions.php',
+        'cfb7c780793bfa1138356bbe97dc66da' => __DIR__ . '/..' . '/leafs/http/src/functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        'cd18aec96aea037961c7c777fe0159ab' => __DIR__ . '/..' . '/leafs/leaf/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -17,14 +20,16 @@ class ComposerStaticInit1a4f30c387dd0a16bf6301d136e31239
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Slim\\Psr7\\' => 10,
-            'Slim\\' => 5,
         ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
-            'Psr\\Http\\Server\\' => 16,
             'Psr\\Http\\Message\\' => 17,
-            'Psr\\Container\\' => 14,
+        ),
+        'L' => 
+        array (
+            'Leaf\\Http\\' => 10,
+            'Leaf\\' => 5,
         ),
         'K' => 
         array (
@@ -33,7 +38,6 @@ class ComposerStaticInit1a4f30c387dd0a16bf6301d136e31239
         'F' => 
         array (
             'Fig\\Http\\Message\\' => 17,
-            'FastRoute\\' => 10,
         ),
     );
 
@@ -46,27 +50,26 @@ class ComposerStaticInit1a4f30c387dd0a16bf6301d136e31239
         array (
             0 => __DIR__ . '/..' . '/slim/psr7/src',
         ),
-        'Slim\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/slim/slim/Slim',
-        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
-        ),
-        'Psr\\Http\\Server\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
-            1 => __DIR__ . '/..' . '/psr/http-server-handler/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Container\\' => 
+        'Leaf\\Http\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/container/src',
+            0 => __DIR__ . '/..' . '/leafs/http/src',
+        ),
+        'Leaf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/leafs/leaf/src',
+            1 => __DIR__ . '/..' . '/leafs/exception/src',
+            2 => __DIR__ . '/..' . '/leafs/fs/src',
+            3 => __DIR__ . '/..' . '/leafs/form/src',
+            4 => __DIR__ . '/..' . '/leafs/anchor/src',
         ),
         'Kamiql\\Portfolio\\' => 
         array (
@@ -75,10 +78,6 @@ class ComposerStaticInit1a4f30c387dd0a16bf6301d136e31239
         'Fig\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/fig/http-message-util/src',
-        ),
-        'FastRoute\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
         ),
     );
 

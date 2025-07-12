@@ -6,7 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    '253c157292f75eb38082b5acb06f3f01' => $vendorDir . '/nikic/fast-route/src/functions.php',
+    'f7a40c1f1f5eb11aee5f7554cb0c8ea7' => $vendorDir . '/leafs/form/src/functions.php',
+    '025bf6db9cb3aca2ec53130f65ac52ae' => $vendorDir . '/leafs/fs/src/functions.php',
+    'cfb7c780793bfa1138356bbe97dc66da' => $vendorDir . '/leafs/http/src/functions.php',
     '7b11c4dc42b3b3023073cb14e519683c' => $vendorDir . '/ralouphie/getallheaders/src/getallheaders.php',
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
+    'cd18aec96aea037961c7c777fe0159ab' => $vendorDir . '/leafs/leaf/src/functions.php',
 );

@@ -12,7 +12,7 @@
         }
     ],
     "require": {
-        "slim/slim": "^4.0",
-        "slim/psr7": "^1.7"
+        "slim/psr7": "^1.7",
+        "leafs/leaf": "^4.1"
     }
 }
