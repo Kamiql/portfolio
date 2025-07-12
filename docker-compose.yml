@@ -8,6 +8,7 @@ services:
       - portfolio-network
     ports:
       - "3001:80"
+    restart: always
 
   backend:
     build:
@@ -19,6 +20,7 @@ services:
       - "9001:9000"
     environment:
       - APP_ENV=production
+    restart: always
 
 networks:
   portfolio-network:
