@@ -1,39 +1,30 @@
-FROM composer:2 AS build
-WORKDIR /app
-COPY backend/composer.* ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+FROM php:8.3-fpm
 
-FROM php:8.1-fpm-alpine
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    zip \
+    curl \
+    nginx \
+    supervisor \
+    && docker-php-ext-install zip pdo pdo_mysql
 
-# Install dependencies
-RUN apk add --no-cache nginx supervisor \
-    && mkdir -p /run/nginx \
-    && mkdir -p /var/log/supervisor
+RUN curl -sS https://getcomposer.org/installer | php -- \
+    --install-dir=/usr/local/bin --filename=composer
 
-# Install PHP extensions
-RUN apk add --no-cache --virtual .build-deps \
-        $PHPIZE_DEPS \
-        icu-dev \
-        libxml2-dev \
-    && docker-php-ext-install \
-        pdo_mysql \
-        intl \
-        opcache \
-    && apk del .build-deps
+WORKDIR /var/www/html
 
-# Copy configurations
-COPY docker/backend/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/vendor /var/www/html/vendor
-COPY backend /var/www/html
+COPY backend/composer.json backend/composer.lock ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist --no-interaction
 
-# Create storage directory and set permissions
-RUN mkdir -p /var/www/html/storage \
-    && chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage
+COPY backend/ ./
 
-# Supervisor configuration
-COPY docker/backend/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN composer dump-autoload --optimize
+
+COPY docker/backend/nginx.conf /etc/nginx/conf.d/default.conf
+
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+COPY docker/backend/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+CMD ["/usr/bin/supervisord", "-n"]

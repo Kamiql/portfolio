@@ -1,9 +1,11 @@
-FROM node:18 AS build
+FROM node:18
+
 WORKDIR /app
 COPY frontend/package*.json ./
-RUN npm ci
-COPY frontend/ .
+RUN npm install
+COPY frontend .
+
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+CMD ["npm", "run", "dev", "--", "--host"]

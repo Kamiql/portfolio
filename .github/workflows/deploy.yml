@@ -19,16 +19,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            set -e
-            mkdir -p /root/portfolio
-            cd /root/portfolio
-            
-            if [ -d ".git" ]; then
-              git fetch origin
-              git reset --hard origin/master
-            else
-              git clone https://github.com/kamiql/portfolio.git .
-            fi
-            
-            chmod +x deploy.sh
-            ./deploy.sh
+            cd root/portfolio
+            git pull origin master
+            docker-compose down
+            docker-compose up -d --build
+            docker exec portfolio-backend-1 composer dump-autoload -o
