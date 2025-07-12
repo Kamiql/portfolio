@@ -19,8 +19,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            mkdir portfolio
             cd portfolio
             git pull origin master
-            docker-compose down
-            docker-compose up -d --build
-            docker exec portfolio-backend-1 composer dump-autoload -o
+            chmod +x deploy.sh
+            ./deploy.sh
