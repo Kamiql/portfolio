@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd root/portfolio
+            cd portfolio
             git pull origin master
             docker-compose down
             docker-compose up -d --build
