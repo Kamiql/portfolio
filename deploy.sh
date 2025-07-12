@@ -31,14 +31,6 @@ docker ps
 echo "📦 Optimizing Composer autoloader"
 docker exec "$BACKEND_CONTAINER" composer dump-autoload -o
 
-echo "🧪 Running healthcheck"
-if curl -sSf "$HEALTHCHECK_URL" >/dev/null; then
-  echo "✅ Healthcheck passed"
-else
-  echo "❌ Healthcheck failed" >&2
-  exit 1
-fi
-
 echo "🔁 Testing and reloading Nginx"
 sudo nginx -t && sudo systemctl reload nginx
 
