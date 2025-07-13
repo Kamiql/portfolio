@@ -2,7 +2,7 @@ name: Docker Deploy
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   deploy:
@@ -19,8 +19,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            mkdir portfolio
-            cd portfolio
-            git pull origin master
+            curl -o deploy.sh https://raw.githubusercontent.com/kamiql/portfolio/master/deploy.sh
             chmod +x deploy.sh
             ./deploy.sh

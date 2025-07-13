@@ -1,10 +1,9 @@
+#!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT_DIR="$HOME/portfolio"
-REPO_SSH="git@github.com:USERNAME/REPO.git"
+PROJECT_DIR="/var/www/html/portfolio"
+REPO_SSH="git@github.com:KAMIQL/PORTFOLIO.git"
 DOCKER_COMPOSE="docker-compose"
-BACKEND_CONTAINER="portfolio_backend_1"
-HEALTHCHECK_URL="http://localhost:8080"
 
 if [[ -d "$PROJECT_DIR" ]]; then
   echo "➡️  Entering $PROJECT_DIR"
@@ -25,13 +24,7 @@ $DOCKER_COMPOSE down
 echo "🐳 Building and starting containers"
 $DOCKER_COMPOSE up -d --build
 
-echo "🔎 Current containers:"
-docker ps
-
 echo "📦 Optimizing Composer autoloader"
-docker exec "$BACKEND_CONTAINER" composer dump-autoload -o
-
-echo "🔁 Testing and reloading Nginx"
-sudo nginx -t && sudo systemctl reload nginx
+docker exec portfolio_backend_1 composer dump-autoload -o
 
 echo "🏁 Deployment complete!"
