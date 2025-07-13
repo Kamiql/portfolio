@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PROJECT_DIR="/var/www/html/portfolio"
-REPO_SSH="git@github.com:KAMIQL/PORTFOLIO.git"
+PROJECT_DIR="/portfolio"
+REPO_SSH="github.com/Kamiql/portfolio.git"
 DOCKER_COMPOSE="docker-compose"
 
 if [[ -d "$PROJECT_DIR" ]]; then
