@@ -19,4 +19,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            curl -fsSL https://raw.githubusercontent.com/kamiql/portfolio/master/deploy.sh | bash
+            bash <(curl -s https://raw.githubusercontent.com/kamiql/portfolio/master/deploy.sh)
