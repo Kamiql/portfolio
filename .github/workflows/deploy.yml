@@ -19,6 +19,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            curl -o deploy.sh https://raw.githubusercontent.com/kamiql/portfolio/master/deploy.sh
-            chmod +x deploy.sh
-            ./deploy.sh
+            curl -fsSL https://raw.githubusercontent.com/kamiql/portfolio/master/deploy.sh | bash

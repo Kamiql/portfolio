@@ -2,7 +2,7 @@
 set -euo pipefail
 
 PROJECT_DIR="/portfolio"
-REPO_SSH="github.com/Kamiql/portfolio.git"
+REPO_SSH="git@github.com:Kamiql/portfolio.git"
 DOCKER_COMPOSE="docker-compose"
 
 if [[ -d "$PROJECT_DIR" ]]; then
